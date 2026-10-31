@@ -66,4 +66,4 @@ Not code, but start now:
 - The endings list is a draft until a native speaker reviews it.
 - The strict line-comparison mode requires the record's fact order. The product check does not need it, because a record has one date and one amount of different types, but records with several amounts will.
 - The checker checks facts, not the meaning of the wording around them. This is by design, and it is what the study measures.
-- The exact mahgrs commit used for the October 2026 run was not recorded.
+- The exact mahgrs commit used for the October 2026 run was not recorded. Re-running at the pinned commit reproduces its output byte for byte, so this is no longer a practical gap.

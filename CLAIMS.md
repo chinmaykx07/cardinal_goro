@@ -23,7 +23,7 @@ Every claim we make in public (the README, the Foresight application, talks, pos
 | 5 | One pre-set criterion was missed: amount in words, 626/626 caught, but the 95% lower bound of 99.41% is below the 99.5% bar | FINAL | `experiment/PREREGISTRATION.md` |
 | 6 | The first test launch crashed with no output and was re-run with identical hashes | FACT | `experiment/PREREGISTRATION.md` |
 | 7 | The October test plan was written down before the final run, in the repo; it was **not** on an external registry | FACT | `experiment/PREREGISTRATION.md` |
-| 8 | The exact data commit for the October run was not recorded | FACT | `README.md` |
+| 8 | The exact data commit for the October run was not recorded, **but re-running at the pinned commit `c96e88f` on 31 Oct 2026 reproduced `test_run.txt` byte for byte** | FACT | `scripts/reproduce_october.sh` |
 | 9 | The fresh split (DEV2 = buckets 3–4, TEST2 = 5–7) and the data commit were declared and pushed before any file in buckets 3–7 was opened | FACT | git history: commit d5d8e15 precedes all use; `experiment2/SPLIT.md` |
 | 10 | The product's record-based check made 0 wrong decisions on 15,995 DEV2 records with real date and amount formats (95% upper bounds 0.02%–0.07% per class) | **DEV** | `experiment2/RESULTS_DEV2.md`, `dev2_run.txt` |
 | 11 | Name and place checking made 0 wrong decisions across 17 classes, 10,000 synthetic records each (95% upper bounds 0.04%–0.05%) | **DEV** (synthetic names, draft endings list) | `experiment2/RESULTS_NAMES_DEV.md`, `name_run.txt` |
@@ -32,16 +32,25 @@ Every claim we make in public (the README, the Foresight application, talks, pos
 | 14 | No known wrong decision on the 13,149-case regression set; CI fails on any false accept or false reject | FACT, enforced in CI | `tests/test_regression.py` |
 | 15 | The data (orgpedia/mahgrs) is MIT licensed | FACT | the LICENSE file in that repo |
 | 16 | Any AI text generator against the gate | UNTESTED | milestone M2 |
+| 16a | **Independent replication** by someone outside the project | UNTESTED | invite one; see the README disclosure |
+| 16b | Every dev result and the regression set rebuild byte-identically from the pinned data | FACT, checked in CI | `scripts/reproduce_dev.sh`, CI job `reproduce` |
+| 16c | The code and analyses are AI-assisted (Claude), directed by the maintainer; such commits carry a Co-Authored-By line | FACT | git history; README "How this was built" |
 | 17 | The reviewer study (catch rates, complacency) | UNTESTED | milestone M3 |
 | 18 | Real citizen notices (government resolutions are a stand-in) | UNTESTED | |
 | 19 | Real-world names, initials, transliterated names, and a native-reviewed endings list | UNTESTED | issues #4, #9 |
 | 20 | The final (TEST2) number for the record-based check | UNTESTED | issue #3; run once after the native review |
+
+## Limits of our own verification
+- The checker and its tests were built by the same process, with AI assistance. The scripted errors were designed alongside the checker, so scoring 100% on them is partly by construction. They show the checker does what it was designed to do, not that it catches every real-world error.
+- The regression gate stops *known* mistakes from coming back. It cannot find unknown ones.
+- What would close this gap: independent replication, and test cases written by someone who has not seen the checker.
 
 ## Things we must not say
 - "Zero errors" or "error-free": every zero above is "0 observed in n", with an upper bound.
 - "Pre-registered" for the October run: say "pre-specified in the repository".
 - "Tested on names" without "synthetic, dev, draft endings list".
 - "Never measured" about human oversight in general: say "rarely measured".
+- That the work was done without AI assistance, or that one person did all of it unaided.
 
 ## Note on the Foresight application (submitted 31 Oct 2026)
 At submission it said names and places were not yet tested, which was true then. Rows 10–12 came later the same day and are DEV results. They do not change anything the application claimed.

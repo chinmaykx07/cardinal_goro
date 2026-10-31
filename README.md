@@ -46,8 +46,12 @@ One pre-set criterion was missed: for "amount in words", 626 of 626 were caught,
 
 ## Run
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt     # pinned versions; tested on Python 3.13
 python3 -m pytest tests
+```
+Reproduce every dev result and the regression set from the pinned public data. This fetches DEV2 only and takes about 5 minutes:
+```
+scripts/reproduce_dev.sh
 ```
 Reproduce the experiment (about 10 minutes):
 ```
@@ -55,12 +59,19 @@ git clone https://github.com/orgpedia/mahgrs
 cd experiment
 MAHGRS=<path-to-clone>/GRs PER_FILE=8 python3 -I run_eval.py test 150000 20261030 0
 ```
-The exact mahgrs commit used on 30 Oct 2026 was not recorded. On 31 Oct 2026 its HEAD was `c96e88f731589e1284ecab60ff1a63d3b9c6bb82`. Later commits may change the sample.
+The exact mahgrs commit used on 30 Oct 2026 was not recorded. **Re-running at commit `c96e88f731589e1284ecab60ff1a63d3b9c6bb82` on 31 Oct 2026 reproduced `test_run.txt` byte for byte**, with all 150,000 lines and every number the same. To repeat this check in one command, run `scripts/reproduce_october.sh`; it takes 10–15 minutes.
 
 The test split has now been used once. Comparisons on it are no longer a fair held-out test, so use fresh data or a new split for new work.
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md). In short: a tested gate with names and places, then open generators tested against the gate, then a pre-specified reviewer study (reviewer alone, reviewer helped by the checker, checker alone), then an open decision rule for when human review adds value.
 
-## Licence
-MIT. See `LICENSE`. Data: orgpedia/mahGRs (MIT).
+## How this was built (disclosure)
+This project is AI-assisted. The code, analyses and documents were largely written with Claude (Anthropic), working under the direction of the maintainer (`chinmaykx07`), who decides what is built and merged. Commits written with AI assistance carry a `Co-Authored-By: Claude` line, so the git history shows which commits these are.
+
+The October 2026 experiment in `experiment/` was also run with AI assistance, before this repository existed. The frozen `experiment/frozen_as_run/run_eval.py` still contains that session's scratch path, and its notes are in `experiment/PREREGISTRATION.md`.
+
+**What this means for checking our work:** the same process built the checker and the tests that measure it. The scripted errors were designed alongside the checker, so a perfect score on them is partly by construction, and **independent replication has not yet been done** (see `CLAIMS.md`). The data, code and seeds are all public, and `scripts/reproduce_dev.sh` rebuilds every dev result byte-for-byte, so anyone can check the numbers and design new tests we did not think of.
+
+## Licence and citation
+MIT. See `LICENSE`. The data comes from orgpedia/mahgrs (MIT, © 2023 Orgpedia Foundation); see `THIRD_PARTY_NOTICES.md`. To cite this work, see `CITATION.cff`. Contribution rules are in `CONTRIBUTING.md`, and changes are in `CHANGELOG.md`.

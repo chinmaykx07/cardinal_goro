@@ -35,10 +35,11 @@ One pre-set criterion was missed: for "amount in words", 626 of 626 were caught,
   - The top-level copies differ only in file paths.
 - `src/verified.py`: the message flow (fill slots from the record, check, fall back to the template, abstain).
   - It reads numbers, dates and amounts with `src/factcheck.py`, which is byte-identical to the measured `experiment/frozen_as_run/factcheck.py`. A test enforces this.
-  - The extractor is the measured one, but the comparison against a structured record is new and has not been run on the 150,000-line test. Re-measuring it on fresh data is on the roadmap.
+  - The extractor is the measured one. The comparison against a structured record is new code. It has a **dev** result on fresh data (DEV2): 0 wrong decisions across 15,995 records with real date and amount formats (`experiment2/RESULTS_DEV2.md`). The final held-out run on TEST2 is still to come.
   - Names and places are matched by exact spelling at the start of a word. A suffix is allowed for inflection, so a short name can still falsely match inside a longer one (for example राम inside रामचंद्र).
 - `src/checker_prototype.py`: an earlier checker tested only on synthetic data. Kept for history.
 - `tests/`: unit tests for `src/verified.py`.
+- `experiment2/`: the fresh data split declared on 31 Oct 2026 (DEV2 = buckets 3–4, TEST2 = 5–7, data commit pinned) and the record-based evaluation.
 - `ROADMAP.md`: the plan, with milestones.
 
 ## Run

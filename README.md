@@ -34,10 +34,12 @@ One pre-set criterion was missed: for "amount in words", 626 of 626 were caught,
   - `frozen_as_run/` holds the exact files that were run; they match `code_hashes.txt`.
   - The top-level copies differ only in file paths.
 - `src/verified.py`: the message flow (fill slots from the record, check, fall back to the template, abstain).
-  - **Its checker is simpler than the measured v2 checker.** Merging v2 into it is the next step, so that the shipped code is the tested code.
-  - Its name check is a plain substring match, which can falsely accept a name contained inside a longer name.
+  - It reads numbers, dates and amounts with `src/factcheck.py`, which is byte-identical to the measured `experiment/frozen_as_run/factcheck.py`. A test enforces this.
+  - The extractor is the measured one, but the comparison against a structured record is new and has not been run on the 150,000-line test. Re-measuring it on fresh data is on the roadmap.
+  - Names and places are matched by exact spelling at the start of a word. A suffix is allowed for inflection, so a short name can still falsely match inside a longer one (for example राम inside रामचंद्र).
 - `src/checker_prototype.py`: an earlier checker tested only on synthetic data. Kept for history.
 - `tests/`: unit tests for `src/verified.py`.
+- `ROADMAP.md`: the plan, with milestones.
 
 ## Run
 ```
@@ -55,10 +57,7 @@ The exact mahgrs commit used on 30 Oct 2026 was not recorded. On 31 Oct 2026 its
 The test split has now been used once. Comparisons on it are no longer a fair held-out test, so use fresh data or a new split for new work.
 
 ## Roadmap
-1. Merge the v2 checker into `src/verified.py`; add names and places.
-2. Test open generators against the gate on 1,000+ held-out cases, reporting coverage, false accepts and false rejects.
-3. A pre-registered reviewer study: seeded errors, with and without the gate.
-4. Publish a decision rule for when human review adds value.
+See [ROADMAP.md](ROADMAP.md). In short: a tested gate with names and places, then open generators tested against the gate, then a pre-specified reviewer study (reviewer alone, reviewer helped by the checker, checker alone), then an open decision rule for when human review adds value.
 
 ## Licence
 MIT. See `LICENSE`. Data: orgpedia/mahGRs (MIT).

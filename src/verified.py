@@ -2,10 +2,14 @@
 
 Facts (name, place, ref, date, amount) are never generated: the drafter emits
 {NAME} {PLACE} {REF} {DATE} {AMOUNT} slots and fill() copies from the record.
-check() then verifies the final text; anything doubtful returns reasons, and the
-caller falls back to the approved template.
+check() then verifies the final text with the measured v2 extractor; anything
+doubtful returns reasons, and the caller falls back to the approved template,
+or abstains if the template fails too.
 """
 import re
+from collections import Counter
+
+from factcheck import facts_v2
 
 D = str.maketrans("०१२३४५६७८९", "0123456789")
 MONTHS = ["जानेवारी", "फेब्रुवारी", "मार्च", "एप्रिल", "मे", "जून", "जुलै",
@@ -45,25 +49,42 @@ def fill(draft: str, rec: dict) -> str:
     return out
 
 
+def _expected_facts(rec: dict) -> Counter:
+    d, m, y = rec["date"]
+    return Counter([("D", int(y), int(m), int(d)), ("N", str(int(rec["amount"])))])
+
+
 def check(text: str, rec: dict) -> list:
-    """Return a list of failure reasons; empty list means the text passed."""
+    """Return a list of failure reasons; empty list means the text passed.
+
+    Numbers, dates and amounts are read by the measured v2 extractor
+    (src/factcheck.py, byte-identical to experiment/frozen_as_run/factcheck.py).
+    The record has exactly one date and one amount, which are different fact
+    types, so comparing them without regard to order cannot hide a swap.
+    Any extra numeral, or a date missing its year, fails.
+    """
     fails, t = [], text.translate(D)
     refs = re.findall(r"RTS/\d{4}/\d+", t)
     if refs != [rec["ref"]]:
         fails.append("ref")
-    t = re.sub(r"RTS/\d{4}/\d+", " ", t)
-    pat = r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})"
-    dates = [(int(a), MONTHS.index(b) + 1, int(c)) for a, b, c in re.findall(pat, t)]
-    t = re.sub(pat, " ", t)
-    dates += [(int(a), int(b), int(c)) for a, b, c in re.findall(r"(\d{1,2})/(\d{1,2})/(\d{4})", t)]
-    t = re.sub(r"(\d{1,2})/(\d{1,2})/(\d{4})", " ", t)
-    if dates != [tuple(rec["date"])]:
+    rest = re.sub(r"RTS/\d{4}/\d+", " ", t)
+    got, want = Counter(facts_v2(rest)), _expected_facts(rec)
+
+    def split(c):
+        dates = Counter({f: n for f, n in c.items() if f[0] == "D"})
+        return dates, c - dates
+
+    got_dates, got_other = split(got)
+    want_dates, want_other = split(want)
+    if got_dates != want_dates:
         fails.append("date")
-    nums = [int(x.replace(",", "")) for x in re.findall(r"\d[\d,]*", t)]
-    if nums != [rec["amount"]]:
+    if got_other != want_other:  # includes partial dates (no year) and extra numerals
         fails.append("amount_or_extra_number")
     for part in rec["name"].split() + [rec["place"]]:
-        if part not in text:  # strict, exact; inflected forms still contain the stem
+        # Exact spelling, and the part must start a word (so "राम" does not match
+        # inside "बलराम"). Suffixes after it are allowed for Marathi inflection,
+        # so "राम" still matches inside "रामचंद्र": a known gap (see ROADMAP).
+        if not re.search(r"(?<![\u0900-\u097F])" + re.escape(part), text):
             fails.append(f"missing:{part}")
     return fails
 

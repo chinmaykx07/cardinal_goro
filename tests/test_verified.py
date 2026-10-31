@@ -60,3 +60,44 @@ def test_amount_filled_in_indian_grouping():
 def test_bad_template_abstains_instead_of_sending():
     text, source = render_or_fallback("{FOO}", TPL + " ९९", REC)
     assert (text, source) == (None, "abstain")
+
+
+# --- the product now uses the measured v2 extractor ------------------------------
+import hashlib
+
+ROOT = pathlib.Path(__file__).parent.parent
+
+
+def test_shipped_extractor_is_the_measured_one():
+    shipped = hashlib.sha256((ROOT / "src" / "factcheck.py").read_bytes()).hexdigest()
+    frozen = [l.split()[0] for l in (ROOT / "experiment" / "code_hashes.txt").read_text().splitlines()
+              if l.strip().endswith("factcheck.py")][0]
+    assert shipped == frozen
+
+
+def test_numeric_date_format_accepted():
+    text = fill(TPL, REC).replace("३० नोव्हेंबर २०२६", "३०.११.२०२६")
+    assert check(text, REC) == []
+
+
+def test_amount_in_lakh_accepted():
+    rec = dict(REC, amount=1250000)
+    text = fill(TPL, rec).replace("₹१२,५०,०००", "₹१२.५ लाख")
+    assert check(text, rec) == []
+
+
+def test_lakh_crore_swap_caught():
+    rec = dict(REC, amount=1250000)
+    text = fill(TPL, rec).replace("₹१२,५०,०००", "₹१२.५ कोटी")
+    assert "amount_or_extra_number" in check(text, rec)
+
+
+def test_date_without_year_rejected():
+    text = fill(TPL, REC).replace("३० नोव्हेंबर २०२६", "३० नोव्हेंबर")
+    assert "date" in check(text, REC)
+
+
+def test_name_must_start_a_word():
+    rec = dict(REC, name="राम")
+    text = fill(TPL, rec).replace("राम", "बलराम", 1)
+    assert "missing:राम" in check(text, rec)

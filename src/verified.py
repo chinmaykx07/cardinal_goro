@@ -6,6 +6,7 @@ check() then verifies the final text with the measured v2 extractor; anything
 doubtful returns reasons, and the caller falls back to the approved template,
 or abstains if the template fails too.
 """
+import os
 import re
 from collections import Counter
 
@@ -29,6 +30,27 @@ def indian_group(n: int) -> str:
         pairs.insert(0, head[-2:])
         head = head[:-2]
     return ",".join([head] + pairs + [tail])
+
+_SUFFIX_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "marathi_suffixes.txt")
+SUFFIXES = tuple(l.strip() for l in open(_SUFFIX_FILE, encoding="utf-8")
+                 if l.strip() and not l.lstrip().startswith("#"))
+_LETTER = r"[\u0900-\u097F\u200c\u200d]"   # any Devanagari letter, sign or joiner
+_SUFFIX_ALT = "|".join(sorted(map(re.escape, SUFFIXES), key=len, reverse=True))
+
+
+def name_present(name: str, text: str) -> bool:
+    """True if the whole `name` appears in one piece: its words in the record's
+    order, separated only by spaces, starting a word, with at most one allowed
+    case ending after the LAST word. Fail-closed: anything else (stem changes,
+    the oblique vowel, a longer name that starts with it, words in another order,
+    or the parts scattered across the message) counts as absent."""
+    words = name.split()
+    if not words:
+        return False
+    body = r"\s+".join(map(re.escape, words))
+    pat = (r"(?<!" + _LETTER + r")" + body
+           + r"(?:" + _SUFFIX_ALT + r")?" + r"(?!" + _LETTER + r")")
+    return re.search(pat, text) is not None
 
 
 def fill(draft: str, rec: dict) -> str:
@@ -80,12 +102,9 @@ def check(text: str, rec: dict) -> list:
         fails.append("date")
     if got_other != want_other:  # includes partial dates (no year) and extra numerals
         fails.append("amount_or_extra_number")
-    for part in rec["name"].split() + [rec["place"]]:
-        # Exact spelling, and the part must start a word (so "राम" does not match
-        # inside "बलराम"). Suffixes after it are allowed for Marathi inflection,
-        # so "राम" still matches inside "रामचंद्र": a known gap (see ROADMAP).
-        if not re.search(r"(?<![\u0900-\u097F])" + re.escape(part), text):
-            fails.append(f"missing:{part}")
+    for whole in (rec["name"], rec["place"]):
+        if not name_present(whole, text):
+            fails.append(f"missing:{whole}")
     return fails
 
 

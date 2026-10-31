@@ -24,7 +24,7 @@ One pre-set criterion was missed: for "amount in words", 626 of 626 were caught,
 ## What is NOT tested (please do not cite these results for them)
 - **Free rewording by a model.** The valid rewrites are changes of format (digit script, commas, date style, rupee sign, spacing), not paraphrase.
 - **Changes to the order of facts.** The strict checker assumes the draft keeps the record's order of facts. An order-free comparison catches only 17.8% of swapped values.
-- **Names and places**, and **any generator** (LLM, ByT5, NCM).
+- **Real-world names** (only synthetic names have been tested, as a dev result) and **any generator** (LLM, ByT5, NCM).
 - **Citizen notices.** Government resolutions are used as a stand-in.
 - **Errors beyond the 11 scripted classes.**
 - **The English-translation cross-check** in `experiment/audit.py` is weak (dates 96.6%, rupee amounts 76.1%), because the translations are machine-made and often garbled.
@@ -36,11 +36,13 @@ One pre-set criterion was missed: for "amount in words", 626 of 626 were caught,
 - `src/verified.py`: the message flow (fill slots from the record, check, fall back to the template, abstain).
   - It reads numbers, dates and amounts with `src/factcheck.py`, which is byte-identical to the measured `experiment/frozen_as_run/factcheck.py`. A test enforces this.
   - The extractor is the measured one. The comparison against a structured record is new code. It has a **dev** result on fresh data (DEV2): 0 wrong decisions across 15,995 records with real date and amount formats (`experiment2/RESULTS_DEV2.md`). The final held-out run on TEST2 is still to come.
-  - Names and places are matched by exact spelling at the start of a word. A suffix is allowed for inflection, so a short name can still falsely match inside a longer one (for example राम inside रामचंद्र).
+  - Names and places must appear whole and in one piece, with at most one allowed case ending (`src/marathi_suffixes.txt`, a draft pending native review). Anything else is rejected, which is fail-closed. Dev result on synthetic names: `experiment2/RESULTS_NAMES_DEV.md`.
 - `src/checker_prototype.py`: an earlier checker tested only on synthetic data. Kept for history.
 - `tests/`: unit tests for `src/verified.py`.
 - `experiment2/`: the fresh data split declared on 31 Oct 2026 (DEV2 = buckets 3–4, TEST2 = 5–7, data commit pinned) and the record-based evaluation.
 - `ROADMAP.md`: the plan, with milestones.
+- `CLAIMS.md`: every public claim, its evidence and its status (FINAL / DEV / FACT / UNTESTED). Check it before quoting a number.
+- `tests/test_regression.py`: 13,149 labelled cases; CI fails on any false accept or false reject.
 
 ## Run
 ```

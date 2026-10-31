@@ -1,0 +1,33 @@
+# Case endings allowed directly after a name or place, with no space.
+# STATUS: DRAFT, NOT YET REVIEWED BY A NATIVE SPEAKER (issue #4, #9).
+#
+# Rule (fail-closed): a name part matches only if it is followed by a word
+# boundary or by exactly one ending from this list, then a word boundary.
+# Deliberately NOT allowed:
+#   - the oblique vowel "ा" before an ending (रामाला): it would let the name
+#     राज match inside राजाला, which names a different person (राजा);
+#   - stem changes (पाटील -> पाटलांना, पुणे -> पुण्याला).
+# Both are rejected, so the message falls back to the template. That is a
+# false reject (safe), never a false accept.
+#
+# Adding an ending can only create false accepts, so each addition needs:
+# a native speaker's sign-off, and the name test set re-run with zero false accepts.
+ने
+ला
+ना
+चा
+ची
+चे
+च्या
+कडे
+कडून
+कडील
+मध्ये
+शी
+साठी
+पासून
+पर्यंत
+वर
+तर्फे
+ही
+च

@@ -17,7 +17,7 @@ Goal: arrive at 1 Feb 2027 with the gate solid and the study design ready, so fu
 | P0-1 | The product uses the measured extractor | `src/factcheck.py` byte-identical to the frozen file, with a test enforcing it; `verified.check` built on it | ✅ |
 | P0-2 | Fresh data split for all future tests | The pre-registered split used hash buckets 0–2 (dev) and 8–9 (test). Buckets 3–7 were never used. Reserve 3–4 as DEV2 and 5–7 as TEST2, write this down before touching them, and pin the mahgrs commit (`experiment2/SPLIT.md`) | ✅ |
 | P0-3 | Re-measure the product's record-based check | Run `verified.check` against scripted rewrites and corruptions on DEV2. Report false rejects and catches with intervals. TEST2 stays untouched. Dev result: 0 wrong decisions in 15,995 records (`experiment2/RESULTS_DEV2.md`); the final TEST2 run waits for P0-4 | 🔄 |
-| P0-4 | Name and place matching | A list of Marathi case suffixes; a test set of name variants (inflections, spelling variants, a name inside a longer name); fix the known राम/रामचंद्र gap | ⬜ |
+| P0-4 | Name and place matching | A list of Marathi case suffixes; a test set of name variants (inflections, spelling variants, a name inside a longer name); fix the known राम/रामचंद्र gap. Done as a dev result: fail-closed rule, 0 wrong in 17 classes (`experiment2/RESULTS_NAMES_DEV.md`). **Waiting for a native speaker to review `src/marathi_suffixes.txt`** | 🔄 |
 | P0-5 | Record schema and three notice types | A JSON schema for a record (name, place, ref, date, amount, decision, reason code), plus approved templates for three notice types, e.g. RTS application rejected, approved, documents missing | ⬜ |
 | P0-6 | Error taxonomy for the study | Two lists: errors the checker can see (digits, dates, amounts, refs, names) and errors it cannot (decision flipped, wrong reason, wrong deadline written in words, wrong office). Each has a script that plants it | ⬜ |
 | P0-7 | Draft study protocol | Conditions (reviewer alone / reviewer + checker / checker alone), outcomes (catch rate by error type, time, approvals without opening facts), hypothesis H1 (a passing check lowers catch rate for errors the checker cannot see), a power calculation that sets the number of reviewers and items, and an analysis plan | ⬜ |
@@ -53,13 +53,17 @@ Not code, but start now:
 ---
 
 ## Rules we keep
+- Every public claim has a row in `CLAIMS.md` with its evidence and status (FINAL / DEV / FACT / UNTESTED).
+- CI fails on any false accept or false reject on the regression set (`tests/test_regression.py`). Its labels come from how the cases were built, never from the checker.
+- A change that could allow more messages through (for example a new allowed ending) needs the name test re-run with zero false accepts, and a native speaker's sign-off.
 - Facts are copied from the record, never generated.
 - No result is reported for something not yet tested. The README's "not tested" list is kept up to date.
 - Every held-out set is used once for a final number. Tuning happens only on dev data.
 - Changes to a frozen design are written down as dated amendments, before the data they affect is used.
 
 ## Known gaps (tracked)
-- Names: a short name can match inside a longer one (राम / रामचंद्र).
+- Names: correct inflected forms with the oblique vowel or a stem change (रामाला, पाटलांना, पुण्याला) are rejected by design, as safe false rejects.
+- The endings list is a draft until a native speaker reviews it.
 - The strict line-comparison mode requires the record's fact order. The product check does not need it, because a record has one date and one amount of different types, but records with several amounts will.
 - The checker checks facts, not the meaning of the wording around them. This is by design, and it is what the study measures.
 - The exact mahgrs commit used for the October 2026 run was not recorded.

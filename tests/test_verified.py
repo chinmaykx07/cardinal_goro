@@ -101,3 +101,40 @@ def test_name_must_start_a_word():
     rec = dict(REC, name="राम")
     text = fill(TPL, rec).replace("राम", "बलराम", 1)
     assert "missing:राम" in check(text, rec)
+
+
+# --- names and places: fail-closed matching (P0-4) ---------------------------------
+from verified import name_present
+
+
+def test_name_with_allowed_ending_accepted():
+    assert name_present("सुनीता पाटील", "सुनीता पाटीलला कळवण्यात येते")
+    assert name_present("नाशिक", "नाशिकमध्ये")
+
+
+def test_name_inside_longer_name_rejected():
+    assert not name_present("राम", "रामचंद्र")
+    assert not name_present("राम", "बलराम")
+
+
+def test_oblique_vowel_not_allowed_so_raj_does_not_match_raja():
+    assert not name_present("राज", "राजाला")
+
+
+def test_stem_change_rejected_fail_closed():
+    assert not name_present("पाटील", "पाटलांना")
+    assert not name_present("पुणे", "पुण्याला")
+
+
+def test_scattered_name_parts_rejected():
+    # the surname belongs to someone else, the first name is part of a street name
+    assert not name_present("सुनीता पाटील", "अनिता पाटील यांचा अर्ज, सुनीता नगर")
+
+
+def test_reordered_name_rejected_fail_closed():
+    assert not name_present("सुनीता पाटील", "पाटील सुनीता")
+
+
+def test_wrong_name_in_message_fails_check():
+    bad = fill(TPL, REC).replace("सुनीता पाटील", "अनिता पाटील")
+    assert "missing:सुनीता पाटील" in check(bad, REC)

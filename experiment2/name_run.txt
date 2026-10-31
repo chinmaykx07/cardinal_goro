@@ -1,0 +1,26 @@
+=== name/place evaluation: 10000 records per class, seed=20261031, 19 allowed endings ===
+
+MUST PASS  (a wrong decision = false reject)
+  exact name and place                                         n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  name + allowed ending                                        n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  place + allowed ending                                       n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  extra spaces inside name                                     n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+
+MUST FAIL  (a wrong decision = false accept, the dangerous kind)
+  name: letter substituted                                     n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  place: letter substituted                                    n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  name: vowel sign changed                                     n=  7485  wrong     0 =   0.00%  95% CI [0.00, 0.05]
+  place: vowel sign changed                                    n=  6778  wrong     0 =   0.00%  95% CI [0.00, 0.05]
+  name: letter deleted                                         n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  place: letter deleted                                        n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  name: letter inserted inside a word                          n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  place: letter inserted inside a word                         n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  different person's name                                      n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  surname replaced                                             n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  name inside a longer word                                    n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  surname belongs to someone else, first name elsewhere        n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+  different place                                              n= 10000  wrong     0 =   0.00%  95% CI [0.00, 0.04]
+
+REJECTED BY DESIGN (correct Marathi that the fail-closed rule refuses)
+  oblique vowel + ending (correct Marathi, rejected by design) n= 10000  rejected  10000 = 100.00%
+  name parts in another order (rejected by design)             n= 10000  rejected  10000 = 100.00%

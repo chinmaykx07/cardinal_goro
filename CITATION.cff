@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this checker, data split or method, please cite it as below."
+title: "Verified Marathi decision messages: a fail-closed fact checker and a method for measuring human oversight of AI-drafted messages"
+authors:
+  - alias: chinmaykx07
+repository-code: "https://github.com/chinmaykx07/cardinal_goro"
+license: MIT
+date-released: 2026-10-31
+keywords:
+  - human oversight
+  - AI safety
+  - fact verification
+  - Marathi
+  - automation bias
+references:
+  - type: dataset
+    title: "mahgrs: Maharashtra Government Resolutions"
+    authors:
+      - name: "Orgpedia Foundation"
+    repository-code: "https://github.com/orgpedia/mahgrs"
+    license: MIT

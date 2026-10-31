@@ -1,0 +1,137 @@
+{
+ "valid|base message (real formats, unchanged)": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|digit script swapped (Devanagari/Latin)": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|crore/lakh written out in full": {
+  "n": 5037,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|rupee sign changed (रु./₹)": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|extra spaces": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|digit substituted": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|digits transposed": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|digit deleted": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|digit inserted": {
+  "n": 15994,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|numeral dropped": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|extra numeral added": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|year off by one": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|month changed": {
+  "n": 7692,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|lakh/crore/thousand swapped": {
+  "n": 5037,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt|two values swapped": {
+  "n": 15995,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|trailing /- added": {
+  "n": 10433,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|date separator or padding changed": {
+  "n": 8303,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|date written with month name": {
+  "n": 8303,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "valid|comma grouping changed": {
+  "n": 6753,
+  "wrong": 0,
+  "reasons": {}
+ },
+ "corrupt_fact|digit substituted": {
+  "n": 11255,
+  "wrong": 0
+ },
+ "corrupt_fact|digits transposed": {
+  "n": 11050,
+  "wrong": 0
+ },
+ "corrupt_fact|digit inserted": {
+  "n": 11709,
+  "wrong": 0
+ },
+ "corrupt_fact|numeral dropped": {
+  "n": 11328,
+  "wrong": 0
+ },
+ "corrupt_fact|extra numeral added": {
+  "n": 15995,
+  "wrong": 0
+ },
+ "corrupt_fact|year off by one": {
+  "n": 7994,
+  "wrong": 0
+ },
+ "corrupt_fact|month changed": {
+  "n": 7692,
+  "wrong": 0
+ },
+ "corrupt_fact|lakh/crore/thousand swapped": {
+  "n": 5037,
+  "wrong": 0
+ },
+ "corrupt_fact|digit deleted": {
+  "n": 10600,
+  "wrong": 0
+ },
+ "corrupt_fact|two values swapped": {
+  "n": 6570,
+  "wrong": 0
+ }
+}

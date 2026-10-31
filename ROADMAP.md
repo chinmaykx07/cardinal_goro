@@ -15,8 +15,8 @@ Goal: arrive at 1 Feb 2027 with the gate solid and the study design ready, so fu
 | # | Task | Done when | Status |
 |---|---|---|---|
 | P0-1 | The product uses the measured extractor | `src/factcheck.py` byte-identical to the frozen file, with a test enforcing it; `verified.check` built on it | ✅ |
-| P0-2 | Fresh data split for all future tests | The pre-registered split used hash buckets 0–2 (dev) and 8–9 (test). Buckets 3–7 were never used. Reserve 3–4 as DEV2 and 5–7 as TEST2, write this down before touching them, and pin the mahgrs commit | ⬜ |
-| P0-3 | Re-measure the product's record-based check | Run `verified.check` against scripted rewrites and corruptions on DEV2. Report false rejects and catches with intervals. TEST2 stays untouched | ⬜ |
+| P0-2 | Fresh data split for all future tests | The pre-registered split used hash buckets 0–2 (dev) and 8–9 (test). Buckets 3–7 were never used. Reserve 3–4 as DEV2 and 5–7 as TEST2, write this down before touching them, and pin the mahgrs commit (`experiment2/SPLIT.md`) | ✅ |
+| P0-3 | Re-measure the product's record-based check | Run `verified.check` against scripted rewrites and corruptions on DEV2. Report false rejects and catches with intervals. TEST2 stays untouched. Dev result: 0 wrong decisions in 15,995 records (`experiment2/RESULTS_DEV2.md`); the final TEST2 run waits for P0-4 | 🔄 |
 | P0-4 | Name and place matching | A list of Marathi case suffixes; a test set of name variants (inflections, spelling variants, a name inside a longer name); fix the known राम/रामचंद्र gap | ⬜ |
 | P0-5 | Record schema and three notice types | A JSON schema for a record (name, place, ref, date, amount, decision, reason code), plus approved templates for three notice types, e.g. RTS application rejected, approved, documents missing | ⬜ |
 | P0-6 | Error taxonomy for the study | Two lists: errors the checker can see (digits, dates, amounts, refs, names) and errors it cannot (decision flipped, wrong reason, wrong deadline written in words, wrong office). Each has a script that plants it | ⬜ |

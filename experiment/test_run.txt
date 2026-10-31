@@ -1,0 +1,97 @@
+
+=== split=test lines=150000 seed=20261030 ===
+
+[VALID] digit script swapped (Devanagari/Latin)   (n=150000)
+   v0 (first deck, multiset)    false-reject     0/150000  =   0.00%   95% CI [0.00, 0.00]
+   v2 strict (ordered)          false-reject     0/150000  =   0.00%   95% CI [0.00, 0.00]
+   v2 lenient (multiset)        false-reject     0/150000  =   0.00%   95% CI [0.00, 0.00]
+
+[VALID] comma grouping changed   (n=4102)
+   v0 (first deck, multiset)    false-reject     0/4102  =   0.00%   95% CI [0.00, 0.09]
+   v2 strict (ordered)          false-reject     4/4102  =   0.10%   95% CI [0.03, 0.25]
+   v2 lenient (multiset)        false-reject     4/4102  =   0.10%   95% CI [0.03, 0.25]
+
+[VALID] date separator or padding changed   (n=14355)
+   v0 (first deck, multiset)    false-reject  9171/14355  =  63.89%   95% CI [63.10, 64.67]
+   v2 strict (ordered)          false-reject     0/14355  =   0.00%   95% CI [0.00, 0.03]
+   v2 lenient (multiset)        false-reject     0/14355  =   0.00%   95% CI [0.00, 0.03]
+
+[VALID] date written with month name   (n=14350)
+   v0 (first deck, multiset)    false-reject 14350/14350  = 100.00%   95% CI [99.97, 100.00]
+   v2 strict (ordered)          false-reject     0/14350  =   0.00%   95% CI [0.00, 0.03]
+   v2 lenient (multiset)        false-reject     0/14350  =   0.00%   95% CI [0.00, 0.03]
+
+[VALID] crore/lakh written out in full   (n=2024)
+   v0 (first deck, multiset)    false-reject  2023/2024  =  99.95%   95% CI [99.73, 100.00]
+   v2 strict (ordered)          false-reject     5/2024  =   0.25%   95% CI [0.08, 0.58]
+   v2 lenient (multiset)        false-reject     5/2024  =   0.25%   95% CI [0.08, 0.58]
+
+[VALID] rupee sign changed (रु./₹)   (n=4846)
+   v0 (first deck, multiset)    false-reject     0/4846  =   0.00%   95% CI [0.00, 0.08]
+   v2 strict (ordered)          false-reject     3/4846  =   0.06%   95% CI [0.01, 0.18]
+   v2 lenient (multiset)        false-reject     3/4846  =   0.06%   95% CI [0.01, 0.18]
+
+[VALID] trailing /- added   (n=777)
+   v0 (first deck, multiset)    false-reject     0/777  =   0.00%   95% CI [0.00, 0.47]
+   v2 strict (ordered)          false-reject     0/777  =   0.00%   95% CI [0.00, 0.47]
+   v2 lenient (multiset)        false-reject     0/777  =   0.00%   95% CI [0.00, 0.47]
+
+[VALID] extra spaces   (n=149896)
+   v0 (first deck, multiset)    false-reject     0/149896  =   0.00%   95% CI [0.00, 0.00]
+   v2 strict (ordered)          false-reject     0/149896  =   0.00%   95% CI [0.00, 0.00]
+   v2 lenient (multiset)        false-reject     0/149896  =   0.00%   95% CI [0.00, 0.00]
+
+[CORRUPT] digit substituted   (n=150000)
+   v0 (first deck, multiset)    detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+   v2 strict (ordered)          detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] digits transposed   (n=113900)
+   v0 (first deck, multiset)    detected     113900/113900  = 100.00%   95% CI [100.00, 100.00]
+   v2 strict (ordered)          detected     113900/113900  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     113900/113900  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] digit deleted   (n=112126)
+   v0 (first deck, multiset)    detected     112072/112126  =  99.95%   95% CI [99.94, 99.96]
+   v2 strict (ordered)          detected     112126/112126  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     112126/112126  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] digit inserted   (n=147614)
+   v0 (first deck, multiset)    detected     147541/147614  =  99.95%   95% CI [99.94, 99.96]
+   v2 strict (ordered)          detected     147614/147614  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     147614/147614  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] numeral dropped   (n=150000)
+   v0 (first deck, multiset)    detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+   v2 strict (ordered)          detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     150000/150000  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] extra numeral added   (n=149896)
+   v0 (first deck, multiset)    detected     149896/149896  = 100.00%   95% CI [100.00, 100.00]
+   v2 strict (ordered)          detected     149896/149896  = 100.00%   95% CI [100.00, 100.00]
+   v2 lenient (multiset)        detected     149896/149896  = 100.00%   95% CI [100.00, 100.00]
+
+[CORRUPT] year off by one   (n=70806)
+   v0 (first deck, multiset)    detected     70806/70806  = 100.00%   95% CI [99.99, 100.00]
+   v2 strict (ordered)          detected     70806/70806  = 100.00%   95% CI [99.99, 100.00]
+   v2 lenient (multiset)        detected     70806/70806  = 100.00%   95% CI [99.99, 100.00]
+
+[CORRUPT] month changed   (n=16739)
+   v0 (first deck, multiset)    detected       793/16739  =   4.74%   95% CI [4.42, 5.07]
+   v2 strict (ordered)          detected     16738/16739  =  99.99%   95% CI [99.97, 100.00]
+   v2 lenient (multiset)        detected     16738/16739  =  99.99%   95% CI [99.97, 100.00]
+
+[CORRUPT] lakh/crore/thousand swapped   (n=2024)
+   v0 (first deck, multiset)    detected         0/2024  =   0.00%   95% CI [0.00, 0.18]
+   v2 strict (ordered)          detected      2021/2024  =  99.85%   95% CI [99.57, 99.97]
+   v2 lenient (multiset)        detected      2021/2024  =  99.85%   95% CI [99.57, 99.97]
+
+[CORRUPT] two values swapped   (n=95545)
+   v0 (first deck, multiset)    detected       691/95545  =   0.72%   95% CI [0.67, 0.78]
+   v2 strict (ordered)          detected     95542/95545  = 100.00%   95% CI [99.99, 100.00]
+   v2 lenient (multiset)        detected     17046/95545  =  17.84%   95% CI [17.60, 18.09]
+
+[CORRUPT] amount in words changed   (n=626)
+   v0 (first deck, multiset)    detected         0/626  =   0.00%   95% CI [0.00, 0.59]
+   v2 strict (ordered)          detected       626/626  = 100.00%   95% CI [99.41, 100.00]
+   v2 lenient (multiset)        detected       626/626  = 100.00%   95% CI [99.41, 100.00]

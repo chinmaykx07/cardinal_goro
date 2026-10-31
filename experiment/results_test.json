@@ -1,0 +1,287 @@
+{
+ "valid|digit script swapped (Devanagari/Latin)": {
+  "n": 150000,
+  "v0 (first deck, multiset)": [
+   150000,
+   0
+  ],
+  "v2 strict (ordered)": [
+   150000,
+   0
+  ],
+  "v2 lenient (multiset)": [
+   150000,
+   0
+  ]
+ },
+ "valid|comma grouping changed": {
+  "n": 4102,
+  "v0 (first deck, multiset)": [
+   4102,
+   0
+  ],
+  "v2 strict (ordered)": [
+   4098,
+   4
+  ],
+  "v2 lenient (multiset)": [
+   4098,
+   4
+  ]
+ },
+ "valid|date separator or padding changed": {
+  "n": 14355,
+  "v0 (first deck, multiset)": [
+   5184,
+   9171
+  ],
+  "v2 strict (ordered)": [
+   14355,
+   0
+  ],
+  "v2 lenient (multiset)": [
+   14355,
+   0
+  ]
+ },
+ "valid|date written with month name": {
+  "n": 14350,
+  "v0 (first deck, multiset)": [
+   0,
+   14350
+  ],
+  "v2 strict (ordered)": [
+   14350,
+   0
+  ],
+  "v2 lenient (multiset)": [
+   14350,
+   0
+  ]
+ },
+ "valid|crore/lakh written out in full": {
+  "n": 2024,
+  "v0 (first deck, multiset)": [
+   1,
+   2023
+  ],
+  "v2 strict (ordered)": [
+   2019,
+   5
+  ],
+  "v2 lenient (multiset)": [
+   2019,
+   5
+  ]
+ },
+ "valid|rupee sign changed (रु./₹)": {
+  "n": 4846,
+  "v0 (first deck, multiset)": [
+   4846,
+   0
+  ],
+  "v2 strict (ordered)": [
+   4843,
+   3
+  ],
+  "v2 lenient (multiset)": [
+   4843,
+   3
+  ]
+ },
+ "valid|trailing /- added": {
+  "n": 777,
+  "v0 (first deck, multiset)": [
+   777,
+   0
+  ],
+  "v2 strict (ordered)": [
+   777,
+   0
+  ],
+  "v2 lenient (multiset)": [
+   777,
+   0
+  ]
+ },
+ "valid|extra spaces": {
+  "n": 149896,
+  "v0 (first deck, multiset)": [
+   149896,
+   0
+  ],
+  "v2 strict (ordered)": [
+   149896,
+   0
+  ],
+  "v2 lenient (multiset)": [
+   149896,
+   0
+  ]
+ },
+ "corrupt|digit substituted": {
+  "n": 150000,
+  "v0 (first deck, multiset)": [
+   0,
+   150000
+  ],
+  "v2 strict (ordered)": [
+   0,
+   150000
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   150000
+  ]
+ },
+ "corrupt|digits transposed": {
+  "n": 113900,
+  "v0 (first deck, multiset)": [
+   0,
+   113900
+  ],
+  "v2 strict (ordered)": [
+   0,
+   113900
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   113900
+  ]
+ },
+ "corrupt|digit deleted": {
+  "n": 112126,
+  "v0 (first deck, multiset)": [
+   54,
+   112072
+  ],
+  "v2 strict (ordered)": [
+   0,
+   112126
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   112126
+  ]
+ },
+ "corrupt|digit inserted": {
+  "n": 147614,
+  "v0 (first deck, multiset)": [
+   73,
+   147541
+  ],
+  "v2 strict (ordered)": [
+   0,
+   147614
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   147614
+  ]
+ },
+ "corrupt|numeral dropped": {
+  "n": 150000,
+  "v0 (first deck, multiset)": [
+   0,
+   150000
+  ],
+  "v2 strict (ordered)": [
+   0,
+   150000
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   150000
+  ]
+ },
+ "corrupt|extra numeral added": {
+  "n": 149896,
+  "v0 (first deck, multiset)": [
+   0,
+   149896
+  ],
+  "v2 strict (ordered)": [
+   0,
+   149896
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   149896
+  ]
+ },
+ "corrupt|year off by one": {
+  "n": 70806,
+  "v0 (first deck, multiset)": [
+   0,
+   70806
+  ],
+  "v2 strict (ordered)": [
+   0,
+   70806
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   70806
+  ]
+ },
+ "corrupt|month changed": {
+  "n": 16739,
+  "v0 (first deck, multiset)": [
+   15946,
+   793
+  ],
+  "v2 strict (ordered)": [
+   1,
+   16738
+  ],
+  "v2 lenient (multiset)": [
+   1,
+   16738
+  ]
+ },
+ "corrupt|lakh/crore/thousand swapped": {
+  "n": 2024,
+  "v0 (first deck, multiset)": [
+   2024,
+   0
+  ],
+  "v2 strict (ordered)": [
+   3,
+   2021
+  ],
+  "v2 lenient (multiset)": [
+   3,
+   2021
+  ]
+ },
+ "corrupt|two values swapped": {
+  "n": 95545,
+  "v0 (first deck, multiset)": [
+   94854,
+   691
+  ],
+  "v2 strict (ordered)": [
+   3,
+   95542
+  ],
+  "v2 lenient (multiset)": [
+   78499,
+   17046
+  ]
+ },
+ "corrupt|amount in words changed": {
+  "n": 626,
+  "v0 (first deck, multiset)": [
+   626,
+   0
+  ],
+  "v2 strict (ordered)": [
+   0,
+   626
+  ],
+  "v2 lenient (multiset)": [
+   0,
+   626
+  ]
+ }
+}
